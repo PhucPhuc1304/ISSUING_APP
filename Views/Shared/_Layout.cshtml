@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title </title>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/hdbank")
+    @Scripts.Render("~/bundles/bootbox")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link href="~/Styles/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Styles/bootstrap-3.3.4-dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Styles/datepicker.min.css" rel="stylesheet" />
+    <link href="~/Styles/Wizard/wizard.css" rel="stylesheet" />
+    <link href="~/Styles/Wizard/jquery.wizard.css" rel="stylesheet" />
+    <link href="/Styles/Style.css?ver=1.2" rel="stylesheet" type="text/css" />
+    @*
+
+
+          <link href="~/Styles/jquery-ui.css" rel="stylesheet" />
+          <link href="~/Styles/bootstrap-3.3.4-dist/css/bootstrap.css" rel="stylesheet" />
+          <link href="~/Styles/datepicker.min.css" rel="stylesheet" />
+          <link href="~/Styles/Wizard/wizard.css" rel="stylesheet" />
+          <link href="~/Styles/Wizard/jquery.wizard.css" rel="stylesheet" />
+
+          <script src="~/Scripts/jquery-1.12.1.min.js"></script>
+
+
+        <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+
+          <script src="~/Scripts/Wizard/jquery.wizard.js"></script>
+
+          <link href="/Styles/Style.css?ver=1.1" rel="stylesheet" type="text/css" />
+          <script src="~/Scripts/bootbox.min.js"></script>
+          <script src="~/Scripts/util.js?v2"></script>
+          <script src="~/Scripts/Common.js?v1"></script>
+    *@
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    @RenderSection("Scripts", false)
+    @RenderSection("Styles", false)
+
+
+
+</head>
+
+
+<body>
+    <div id='divLoadingIndicator' style="background: url('../../Images/ajax-loader.gif') 50% 50% no-repeat black; left: 0px; top: 0px; width: 100%; height: 100%; opacity: 0.5; position: fixed; display: none; z-index: 999999;">
+    </div>
+    <div class="main-group">
+        <div style="top: 0; position: fixed; width: 100%; z-index: 3">
+            <div class="header-group">
+                <h2 style="text-align: center; font-size: 24pt; color: white; font-weight: bold; font-family: arial; padding-top: 0px !important;">CARD MANAGEMENT</h2>
+                <div class="header-sub1">
+                    <img src="~/Images/hdb-logo-bg.png" style="height:75px">
+                </div>
+                
+                    
+                    <div class="header-sub2">
+                        <!-- Split button -->
+                        <span style="color: white; font-weight: bold; font-size: 12px;">001 - BranchName</span><br />
+                        <div class="btn-group" id="Panel1">
+
+                            <input type="button" class="btn btn-default btn-sm" id="btnFullName" value="Name">
+
+                            <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button" style="height: 33px;">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul role="menu" class="dropdown-menu pull-right">
+                                <li>
+                                    @Html.ActionLink("Thoát", "Logout", "Login", new { area = "", id = "" }, null)
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                
+            </div>
+            <div style="clear: both;"></div>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                        <ul class="nav navbar-nav">
+
+                           
+
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div>
+            </nav>
+
+        </div>
+        <div style="clear: both;"></div>
+        <div id="content">
+            @RenderBody()
+        </div>
+    </div>
+    <div class="footer">HDBank © 2016</div>
+
+    <script type="text/javascript">
+        var idleTime = 0;
+        $(document).ready(function () {
+
+            //Increment the idle time counter every minute.
+            var idleInterval = setInterval(timerIncrement, 60 * 1000); // 1 minute
+
+            //Zero the idle timer on mouse movement.
+            $(this).mousemove(function (e) {
+                idleTime = 0;
+            });
+            $(this).keypress(function (e) {
+                idleTime = 0;
+            });
+        });
+
+        function timerIncrement() {
+            idleTime = idleTime + 1;
+            if (idleTime > 20) { // 20 minutes
+                window.location.reload();
+            }
+        }
+
+
+
+    // ham check lay ten trình duyệt và version
+    checkBrowser = (function () {
+        var ua = navigator.userAgent, tem,
+        M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+        if (/trident/i.test(M[1])) {
+            tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
+            return 'IE ' + (tem[1] || '');
+        }
+        if (M[1] === 'Chrome') {
+            tem = ua.match(/\b(OPR|Edge)\/(\d+)/);
+            if (tem != null) return tem.slice(1).join(' ').replace('OPR', 'Opera');
+        }
+        M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
+        if ((tem = ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1]);
+        return M.join(' ');
+    })();
+    // tra ve chuoi dinh dang tentrinhduyet_version, vi du: Chrome 56
+    $(document).ready(function () {
+
+            var browser = checkBrowser;
+            console.log(browser);
+            var temp = new Array();
+            temp = browser.split(' ');// luôn tao ra mang co hai phan tử 0,1
+            var version = Number(temp[1]);
+            if (temp[0] == 'Chrome')
+            {
+
+                if (version <= 50)
+                {
+                    $("#btnLogin").prop('type', 'button');
+
+                    bootbox.alert("Trình duyêt " + temp[0] + " version " + temp[1] + " của bạn không được hỗ trợ!,vui lòng cập nhật lên version mới nhất!");
+                }
+            }
+            if (temp[0] == 'IE')
+            {
+                if (version <= 8)
+                {
+                    $("#btnLogin").prop('type', 'button');
+                    bootbox.alert("Trình duyêt " + temp[0] + " version " + temp[1] + " của bạn không được hỗ trợ!,vui lòng cập nhật lên version mới nhất!")
+                }
+            }
+            if (temp[0] == 'Firefox') {
+                if (version <= 45) {
+                    $("#btnLogin").prop('type', 'button');
+                    bootbox.alert("Trình duyêt " + temp[0] + " version " + version + " của bạn không được hỗ trợ!,vui lòng cập nhật lên version mới nhất!")
+                }
+            }
+
+
+
+    });
+    </script>
+
+
+
+</body>
+</html>

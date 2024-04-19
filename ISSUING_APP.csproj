@@ -1,0 +1,980 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BEAB8C3C-C00E-4D87-8520-0AA209FDB873}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ISSUING_APP</RootNamespace>
+    <AssemblyName>ISSUING_APP</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Authencation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Authencation.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML, Version=0.95.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.95.3\lib\net40\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML.Report, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.Report.0.2.1\lib\net40\ClosedXML.Report.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.ClientDoc, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\DLL\CrystalDecisions.ReportAppServer.ClientDoc.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CommLayer, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\DLL\CrystalDecisions.ReportAppServer.CommLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CommonControls, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\DLL\CrystalDecisions.ReportAppServer.CommonControls.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CommonObjectModel, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\DLL\CrystalDecisions.ReportAppServer.CommonObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.Controllers, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\DLL\CrystalDecisions.ReportAppServer.Controllers.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CubeDefModel, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\DLL\CrystalDecisions.ReportAppServer.CubeDefModel.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\DLL\CrystalDecisions.ReportAppServer.DataDefModel.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.DataSetConversion, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\CrystalDecisions.ReportAppServer.DataSetConversion.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.ObjectFactory, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\DLL\CrystalDecisions.ReportAppServer.ObjectFactory.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.Prompting, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\DLL\CrystalDecisions.ReportAppServer.Prompting.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.ReportDefModel, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\DLL\CrystalDecisions.ReportAppServer.ReportDefModel.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.XmlSerialize, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\DLL\CrystalDecisions.ReportAppServer.XmlSerialize.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\DLL\CrystalDecisions.ReportSource.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.11.3.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.11.3\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="Excel">
+      <HintPath>..\DLL\Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.10.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\DLL\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker">
+      <HintPath>..\DLL\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.0.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.0.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.0.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.0.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MoreLinq, Version=2.9.21302.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.2.9.0\lib\net40\MoreLinq.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\DLL\NPOI.2.2.1net4.0\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\DLL\NPOI.2.2.1net4.0\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\DLL\NPOI.2.2.1net4.0\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\DLL\NPOI.2.2.1net4.0\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.DataAccess, Version=4.112.3.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Oracle.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic.Core, Version=1.1.1.0, Culture=neutral, PublicKeyToken=0f07ec44de6ac832, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.Core.1.1.1\lib\net45\System.Linq.Dynamic.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Vimaru.Infrastructure">
+      <HintPath>..\DLL\Vimaru.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\ISSUING_APPPluginAreaRegistration.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ActiveCardController.cs" />
+    <Compile Include="Controllers\ActiveCardsApproveController.cs" />
+    <Compile Include="Controllers\ADJOrTransferController.cs" />
+    <Compile Include="Controllers\ApproveActiveCardController.cs" />
+    <Compile Include="Controllers\ApproveADJTransferController.cs" />
+    <Compile Include="Controllers\ApproveBatchPrepaidController.cs" />
+    <Compile Include="Controllers\ApproveBulkTopupPrepaidController.cs" />
+    <Compile Include="Controllers\ApproveCancelCardController.cs" />
+    <Compile Include="Controllers\ApproveChangeCardStatusController.cs" />
+    <Compile Include="Controllers\ApproveClientInfoMgmtController.cs" />
+    <Compile Include="Controllers\ApproveCreditCardPaymentController.cs" />
+    <Compile Include="Controllers\ApproveEditClientController.cs" />
+    <Compile Include="Controllers\ApproveEPINAllocationController.cs" />
+    <Compile Include="Controllers\ApproveImportCardController.cs" />
+    <Compile Include="Controllers\ApproveImportCifCardController.cs" />
+    <Compile Include="Controllers\ApproveImportCifController.cs" />
+    <Compile Include="Controllers\ApproveIssCardReqController.cs" />
+    <Compile Include="Controllers\ApproveIssuingCardController.cs" />
+    <Compile Include="Controllers\ApprovePrepaidCardIdentifierController.cs" />
+    <Compile Include="Controllers\ApproveRenewalCardController.cs" />
+    <Compile Include="Controllers\ApproveRenewCardController.cs" />
+    <Compile Include="Controllers\ApproveReplaceCardController.cs" />
+    <Compile Include="Controllers\BCChiTietTinhLaiController.cs" />
+    <Compile Include="Controllers\CancelCardController.cs" />
+    <Compile Include="Controllers\CancelCardsBulkApproveController.cs" />
+    <Compile Include="Controllers\CancelCardsBulkController.cs" />
+    <Compile Include="Controllers\CancelCardsBulkReportController.cs" />
+    <Compile Include="Controllers\CardHistoryController.cs" />
+    <Compile Include="Controllers\KYCOnlineReportController.cs" />
+    <Compile Include="Controllers\CardStatusChangeHistoryController.cs" />
+    <Compile Include="Controllers\ChangeCardStatusController.cs" />
+    <Compile Include="Controllers\ClientInfoMgmtController.cs" />
+    <Compile Include="Controllers\ContractController.cs" />
+    <Compile Include="Controllers\CreditCardPaymentController.cs" />
+    <Compile Include="Controllers\CreditPaymentReportController.cs" />
+    <Compile Include="Controllers\CreditReportController.cs" />
+    <Compile Include="Controllers\CustomerServicesController.cs" />
+    <Compile Include="Controllers\EPINAllocationController.cs" />
+    <Compile Include="Controllers\ImportBulkTopupPrepaidController.cs" />
+    <Compile Include="Controllers\ImportCardController.cs" />
+    <Compile Include="Controllers\ImportCifCardController.cs" />
+    <Compile Include="Controllers\ImportCifController.cs" />
+    <Compile Include="Controllers\InfoCustChangeHistoryController.cs" />
+    <Compile Include="Controllers\IssCardReqMngtController.cs" />
+    <Compile Include="Controllers\IssuingCardsInboxController.cs" />
+    <Compile Include="Controllers\IssuingCreditCardController.cs" />
+    <Compile Include="Controllers\IssuingManagermentController.cs" />
+    <Compile Include="Controllers\IssuingDebitCardsController.cs" />
+    <Compile Include="Controllers\IssuingSearchAdvController.cs" />
+    <Compile Include="Controllers\LockCardBulkReportController.cs" />
+    <Compile Include="Controllers\LockCardBulkApproveController.cs" />
+    <Compile Include="Controllers\LockCardBulkController.cs" />
+    <Compile Include="Controllers\MainIssuingCardController.cs" />
+    <Compile Include="Controllers\MainIssuingCreditCardController.cs" />
+    <Compile Include="Controllers\MainIssuingNoPrepaidCardController.cs" />
+    <Compile Include="Controllers\MainIssuingPrepaidCardController.cs" />
+    <Compile Include="Controllers\MainIssuingSubCreditCardController.cs" />
+    <Compile Include="Controllers\MainListIssuingCardController.cs" />
+    <Compile Include="Controllers\MainListIssuingCardNewController.cs" />
+    <Compile Include="Controllers\MB06Controller.cs" />
+    <Compile Include="Controllers\ActiveCardsReportController.cs" />
+    <Compile Include="Controllers\NangHanMucCredit_BaoCaoController.cs" />
+    <Compile Include="Controllers\ActiveCardsInputController.cs" />
+    <Compile Include="Controllers\NangHanMucTheCredit_DuyetController.cs" />
+    <Compile Include="Controllers\NangHanMucTheCreditController.cs" />
+    <Compile Include="Controllers\PrepaidCardIdentifierController.cs" />
+    <Compile Include="Controllers\RenewalCardController.cs" />
+    <Compile Include="Controllers\RenewCardController.cs" />
+    <Compile Include="Controllers\ReplaceCardController.cs" />
+    <Compile Include="Controllers\ReportExcelController.cs" />
+    <Compile Include="Controllers\ViewBalanceController.cs" />
+    <Compile Include="Controllers\ViewIssuingCardController.cs" />
+    <Compile Include="Controllers\ViewIssuingSubCardController.cs" />
+    <Compile Include="Controllers\WithdrawStatementReportController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ActiveCardLot\Models\ExportCardLotModel.cs" />
+    <Compile Include="Models\ActiveCardLot\Models\ImportCardLotModel.cs" />
+    <Compile Include="Models\ActiveCardLot\Services\ActiveCardLotServices.cs" />
+    <Compile Include="Models\ADJConfig.cs" />
+    <Compile Include="Models\ADJTransfer.cs" />
+    <Compile Include="Models\APIGetContract.cs" />
+    <Compile Include="Models\ApproveEditClientInfo.cs" />
+    <Compile Include="Models\ApproveIssuingCard.cs" />
+    <Compile Include="Models\AuditLog.cs" />
+    <Compile Include="Models\BatchPrepaid.cs" />
+    <Compile Include="Models\CancelCardsBulk\CancelCardsBulk.cs" />
+    <Compile Include="Models\CancelCardsBulk\ImportFileModel.cs" />
+    <Compile Include="Models\CardClassifier.cs" />
+    <Compile Include="Models\CBoxData.cs" />
+    <Compile Include="Models\CEmail.cs" />
+    <Compile Include="Models\CFM_Client.cs" />
+    <Compile Include="Models\CIF.cs" />
+    <Compile Include="Models\Classifier.cs" />
+    <Compile Include="Models\CMRequest.cs" />
+    <Compile Include="Models\collateralIssuingCredit.cs" />
+    <Compile Include="Models\CompresImage.cs" />
+    <Compile Include="Models\ConfigFeeReplace.cs" />
+    <Compile Include="Models\Contract.cs" />
+    <Compile Include="Models\ContractInfoWay4.cs" />
+    <Compile Include="Models\CPanelSearch.cs" />
+    <Compile Include="Models\CreditCardStatement.cs" />
+    <Compile Include="Models\CreditPayment.cs" />
+    <Compile Include="Models\CrystalReport52.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport5.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Models\CShared.cs" />
+    <Compile Include="Models\CustomerServices.cs" />
+    <Compile Include="Models\DataSet1.cs">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataSet1.designer.cs">
+      <DependentUpon>DataSet1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataSet12.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EnumHelper.cs" />
+    <Compile Include="Models\excelXLSXTools .cs" />
+    <Compile Include="Models\InfoCustChangeHistory.cs" />
+    <Compile Include="Models\LockCardBulkModel.cs" />
+    <Compile Include="Models\NangHanMucCreditModel.cs" />
+    <Compile Include="Models\EPINAllocRequest.cs" />
+    <Compile Include="Models\excelTools.cs" />
+    <Compile Include="Models\ExcelUtil.cs" />
+    <Compile Include="Models\GlobalGroupTypes.cs" />
+    <Compile Include="Models\GWSocket.cs" />
+    <Compile Include="Models\GWSocketLockCard.cs" />
+    <Compile Include="Models\ImportCard.cs" />
+    <Compile Include="Models\ImportCif.cs" />
+    <Compile Include="Models\ImportCifCard.cs" />
+    <Compile Include="Models\inLoadFile_ImportCIF.cs" />
+    <Compile Include="Models\IssuingCard.cs" />
+    <Compile Include="Models\IssuingCardData.cs" />
+    <Compile Include="Models\IssuingCardDelivery.cs" />
+    <Compile Include="Models\IssuingCardPrintKT.cs" />
+    <Compile Include="Models\IssuingValidate.cs" />
+    <Compile Include="Models\Issuing_Cards_Inbox.cs" />
+    <Compile Include="Models\Issuing_Classifier_Config.cs" />
+    <Compile Include="Models\Issuing_Config.cs" />
+    <Compile Include="Models\LockCard.cs" />
+    <Compile Include="Models\LO_Limit.cs" />
+    <Compile Include="Models\MainSubCardWay4.cs" />
+    <Compile Include="Models\OracleHelper.cs" />
+    <Compile Include="Models\PrepaidCardInfo.cs" />
+    <Compile Include="Models\ProductCodePrepaid.cs" />
+    <Compile Include="Models\ReEvaluate\ReEvaluateModel.cs" />
+    <Compile Include="Models\RenewalCard.cs" />
+    <Compile Include="Models\RenewCard.cs" />
+    <Compile Include="Models\ReplaceCard.cs" />
+    <Compile Include="Models\ReportUtils.cs" />
+    <Compile Include="Models\SearchAdvData.cs" />
+    <Compile Include="Models\KYCOnlineReport.cs" />
+    <Compile Include="Models\StatusChangeHistory.cs" />
+    <Compile Include="Models\TopupPrepaid.cs" />
+    <Compile Include="Models\Utils.cs" />
+    <Compile Include="Models\UtilsCard.cs" />
+    <Compile Include="Models\UtilsImportCIF.cs" />
+    <Compile Include="Models\VNCurrency.cs" />
+    <Compile Include="Models\Way4Client.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\CancelCardsBulkService.cs" />
+    <Content Include="Scripts\IssuingCards\Debit.Create.js" />
+    <Content Include="Views\ApproveRenewCard\_SearchPanel.cshtml" />
+    <Content Include="Views\ApproveRenewCard\Index.cshtml" />
+    <Content Include="Views\ApproveRenewCard\SearchData.cshtml" />
+    <Content Include="Views\ApproveRenewCard\ViewInfo.cshtml" />
+    <Content Include="Views\ImportCifCard\Index.cshtml" />
+    <Content Include="Views\ImportCifCard\SearchData.cshtml" />
+    <Content Include="Views\ImportCifCard\_SearchPanel.cshtml" />
+    <Content Include="Views\MainIssuingPrepaidCard\ClassifierByProductCode.cshtml" />
+    <Content Include="Views\MainIssuingPrepaidCard\Index.cshtml" />
+    <Content Include="Views\MainIssuingPrepaidCard\ListAccountData.cshtml" />
+    <Content Include="Views\MainIssuingPrepaidCard\ListCardData.cshtml" />
+    <Content Include="Views\MainIssuingPrepaidCard\MenuSearchCard.cshtml" />
+    <Content Include="Views\MainIssuingPrepaidCard\SearchSaler.cshtml" />
+    <Content Include="Views\MainIssuingPrepaidCard\_CustomerInfo_Partial.cshtml" />
+    <Content Include="Views\MainIssuingPrepaidCard\_PrepaidCardInfo_Partial.cshtml" />
+    <Content Include="Views\MainIssuingNoPrepaidCard\Edit.cshtml" />
+    <Content Include="Views\MainIssuingNoPrepaidCard\Index.cshtml" />
+    <Content Include="Views\MainIssuingNoPrepaidCard\SearchSaler.cshtml" />
+    <Content Include="Views\MainIssuingNoPrepaidCard\_CustomerInfo_Partial.cshtml" />
+    <Content Include="Views\PrepaidCardIdentifier\Index.cshtml" />
+    <Content Include="Views\PrepaidCardIdentifier\Client.cshtml" />
+    <Content Include="Views\ApprovePrepaidCardIdentifier\_SearchPanel.cshtml" />
+    <Content Include="Views\ApprovePrepaidCardIdentifier\DetailIdentifier.cshtml" />
+    <Content Include="Views\ApprovePrepaidCardIdentifier\Index.cshtml" />
+    <Content Include="Views\ApprovePrepaidCardIdentifier\SearchData.cshtml" />
+    <Content Include="Views\ApproveBatchPrepaid\Index.cshtml" />
+    <Content Include="Views\ApproveBatchPrepaid\Search.cshtml" />
+    <Content Include="Views\ApproveBatchPrepaid\DetailCreatePrepaid.cshtml" />
+    <Content Include="Views\MainIssuingNoPrepaidCard\IndexOld.cshtml" />
+    <Content Include="Views\MainIssuingNoPrepaidCard\_CustomerInfo_PartialOld.cshtml" />
+    <Content Include="Views\ApproveBatchPrepaid\DetailCreatePrepaidOld.cshtml" />
+    <Content Include="Views\ApproveImportCifCard\Index.cshtml" />
+    <Content Include="Views\ApproveImportCifCard\SearchData.cshtml" />
+    <Content Include="Views\ApproveImportCifCard\ShowDetail.cshtml" />
+    <Content Include="Views\ApproveImportCifCard\Template\PDF_KT09A.cshtml" />
+    <Content Include="Views\ApproveImportCifCard\ViewApprove.cshtml" />
+    <Content Include="Views\ApproveImportCifCard\_SearchPanel.cshtml" />
+    <Content Include="Views\CustomerServices\SearchData.cshtml" />
+    <Content Include="Views\MainIssuingCreditCard\Clients.cshtml" />
+    <Content Include="Views\ApproveClientInfoMgmt\Index.cshtml" />
+    <Content Include="Views\ApproveClientInfoMgmt\_SearchPanel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\ajax-loader.gif" />
+    <Content Include="Images\error.gif" />
+    <Content Include="Images\hdb-header-bg.gif" />
+    <Content Include="Images\hdb-logo-bg.png" />
+    <Content Include="Images\Home.png" />
+    <Content Include="Images\ic_detail.png" />
+    <Content Include="Images\ic_edit.png" />
+    <Content Include="Images\ic_error.png" />
+    <Content Include="Images\ic_printer.png" />
+    <Content Include="Images\ic_success.png" />
+    <Content Include="Images\progressbar.gif" />
+    <Content Include="Scripts\ai.0.22.9-build00167.js" />
+    <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Scripts\bootbox.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Models\DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="Models\DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet12.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Models\DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Common.js" />
+    <Content Include="Scripts\html5shiv.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.12.1.min.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\util.js" />
+    <Content Include="Scripts\Vendor\dataTables\css\fixedColumns.dataTables.min.css" />
+    <Content Include="Scripts\Vendor\dataTables\css\jquery.dataTables.min.css" />
+    <Content Include="Scripts\Vendor\dataTables\images\sort_asc.png" />
+    <Content Include="Scripts\Vendor\dataTables\images\sort_both.png" />
+    <Content Include="Scripts\Vendor\dataTables\images\sort_desc.png" />
+    <Content Include="Scripts\Vendor\dataTables\js\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\Vendor\dataTables\js\dataTables.fixedColumns.min.js" />
+    <Content Include="Scripts\Vendor\dataTables\js\dataTables.fixedHeader.min.js" />
+    <Content Include="Scripts\Vendor\dataTables\js\jquery.dataTables.min.js" />
+    <Content Include="Scripts\Vendor\duallistbox\bootstrap-duallistbox.css" />
+    <Content Include="Scripts\Vendor\duallistbox\bootstrap-duallistbox.min.css" />
+    <Content Include="Scripts\Vendor\duallistbox\jquery.bootstrap-duallistbox.js" />
+    <Content Include="Scripts\Vendor\duallistbox\jquery.bootstrap-duallistbox.min.js" />
+    <Content Include="Scripts\Vendor\jqtransform\css\img\select_left.gif" />
+    <Content Include="Scripts\Vendor\jqtransform\css\img\select_right.gif" />
+    <Content Include="Scripts\Vendor\jqtransform\css\jqtransform.css" />
+    <Content Include="Scripts\Vendor\jqtransform\js\jquery.jqtransform.js" />
+    <Content Include="Scripts\Vendor\jquery.numberedTextarea\JQuery.NumberedTextarea.js" />
+    <Content Include="Scripts\Vendor\jquery.numberedTextarea\style.css" />
+    <Content Include="Scripts\Vendor\Main\css\Style.css" />
+    <Content Include="Scripts\Vendor\Main\css\tooltip.css" />
+    <Content Include="Scripts\Vendor\SelectOption\css\jquery-customselect-1.9.1.css" />
+    <Content Include="Scripts\Vendor\SelectOption\js\jquery-customselect-1.9.1.js" />
+    <Content Include="Scripts\Vendor\SelectOption\js\jquery-customselect-1.9.1.min.js" />
+    <Content Include="Scripts\Wizard\jquery-1.8.3.js" />
+    <Content Include="Scripts\Wizard\jquery-ui-1.9.2.js" />
+    <Content Include="Scripts\Wizard\jquery.wizard.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Styles\bootstrap-3.3.4-dist\css\bootstrap-theme.css" />
+    <Content Include="Styles\bootstrap-3.3.4-dist\css\bootstrap-theme.min.css" />
+    <Content Include="Styles\bootstrap-3.3.4-dist\css\bootstrap.css" />
+    <Content Include="Styles\bootstrap-3.3.4-dist\css\bootstrap.min.css" />
+    <Content Include="Styles\bootstrap-3.3.4-dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Styles\bootstrap-3.3.4-dist\js\bootstrap.js" />
+    <Content Include="Styles\bootstrap-3.3.4-dist\js\bootstrap.min.js" />
+    <Content Include="Styles\bootstrap-3.3.4-dist\js\npm.js" />
+    <Content Include="Styles\datepicker.min.css" />
+    <Content Include="Styles\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Styles\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Styles\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Styles\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Styles\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Styles\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Styles\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Styles\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Styles\images\ui-icons_222222_256x240.png" />
+    <Content Include="Styles\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Styles\images\ui-icons_454545_256x240.png" />
+    <Content Include="Styles\images\ui-icons_888888_256x240.png" />
+    <Content Include="Styles\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Styles\jquery-ui-1.7.1.custom.css" />
+    <Content Include="Styles\jquery-ui.css" />
+    <Content Include="Styles\Site.css" />
+    <Content Include="Styles\Style.css" />
+    <Content Include="Styles\Wizard\images\arrows.png" />
+    <Content Include="Styles\Wizard\images\arrows_colored.png" />
+    <Content Include="Styles\Wizard\images\big_arrows_colored.png" />
+    <Content Include="Styles\Wizard\images\breadcrumpts.png" />
+    <Content Include="Styles\Wizard\images\btn-sprite.png" />
+    <Content Include="Styles\Wizard\images\button_arrows.png" />
+    <Content Include="Styles\Wizard\images\calendar_arrows.png" />
+    <Content Include="Styles\Wizard\images\calendar_bg_bottom.png" />
+    <Content Include="Styles\Wizard\images\calendar_bg_top.png" />
+    <Content Include="Styles\Wizard\images\cancel.png" />
+    <Content Include="Styles\Wizard\images\checkbox.png" />
+    <Content Include="Styles\Wizard\images\chosen-sprite.png" />
+    <Content Include="Styles\Wizard\images\contact.png" />
+    <Content Include="Styles\Wizard\images\copy.png" />
+    <Content Include="Styles\Wizard\images\dbc.png" />
+    <Content Include="Styles\Wizard\images\flag.png" />
+    <Content Include="Styles\Wizard\images\footer.png" />
+    <Content Include="Styles\Wizard\images\header_bg.png" />
+    <Content Include="Styles\Wizard\images\icons-sprite.png" />
+    <Content Include="Styles\Wizard\images\info.png" />
+    <Content Include="Styles\Wizard\images\info_icon.png" />
+    <Content Include="Styles\Wizard\images\info_light.png" />
+    <Content Include="Styles\Wizard\images\input_bg.png" />
+    <Content Include="Styles\Wizard\images\lbc.png" />
+    <Content Include="Styles\Wizard\images\logo.png" />
+    <Content Include="Styles\Wizard\images\logout.png" />
+    <Content Include="Styles\Wizard\images\modal_bg.png" />
+    <Content Include="Styles\Wizard\images\pricing.png" />
+    <Content Include="Styles\Wizard\images\radio.png" />
+    <Content Include="Styles\Wizard\images\select_bg.png" />
+    <Content Include="Styles\Wizard\images\settings.png" />
+    <Content Include="Styles\Wizard\images\side-sprite.png" />
+    <Content Include="Styles\Wizard\images\tools.png" />
+    <Content Include="Styles\Wizard\images\top_menu_icons.png" />
+    <Content Include="Styles\Wizard\images\wc.png" />
+    <Content Include="Styles\Wizard\jquery.wizard.css" />
+    <Content Include="Styles\Wizard\wizard.css" />
+    <Content Include="Views\ActiveCard\Index.cshtml" />
+    <Content Include="Views\ActiveCard\SearchData.cshtml" />
+    <Content Include="Views\ActiveCard\_SearchPanel.cshtml" />
+    <Content Include="Views\ApproveActiveCard\Index.cshtml" />
+    <Content Include="Views\ApproveActiveCard\SearchData.cshtml" />
+    <Content Include="Views\ApproveCancelCard\Index.cshtml" />
+    <Content Include="Views\ApproveCancelCard\SearchData.cshtml" />
+    <Content Include="Views\ApproveIssuingCard\Index.cshtml" />
+    <Content Include="Views\ApproveIssuingCard\SearchData.cshtml" />
+    <Content Include="Views\ApproveIssuingCard\ViewAndApprove.cshtml" />
+    <Content Include="Views\ApproveIssuingCard\_SearchPanel.cshtml" />
+    <Content Include="Views\ApproveLockCard\ApproveCardDialog_PartialPage.cshtml" />
+    <Content Include="Views\ApproveLockCard\ApproveLockCard_PartialPage.cshtml" />
+    <Content Include="Views\ApproveLockCard\Main - Copy.cshtml" />
+    <Content Include="Views\ApproveLockCard\Main.cshtml" />
+    <Content Include="Views\CancelCard\Index.cshtml" />
+    <Content Include="Views\CancelCard\SearchData.cshtml" />
+    <Content Include="Views\CancelCard\_SearchPanel.cshtml" />
+    <Content Include="Views\LockCard\CardDialog_PartialPage.cshtml" />
+    <Content Include="Views\LockCard\CardGrid_Fast_PartialPage.cshtml" />
+    <Content Include="Views\LockCard\CardGrid_PartialPage.cshtml" />
+    <Content Include="Views\LockCard\ClientGrid_PartialPage.cshtml" />
+    <Content Include="Views\LockCard\index.cshtml" />
+    <Content Include="Views\LockCard\LockCart_PartialPage.cshtml" />
+    <Content Include="Views\LockCard\Main - Copy.cshtml" />
+    <Content Include="Views\LockCard\Main.cshtml" />
+    <Content Include="Views\MainIssuingCard\index.cshtml" />
+    <Content Include="Views\MainListIssuingCard\Index.cshtml" />
+    <Content Include="Views\MainListIssuingCard\SearchData.cshtml" />
+    <Content Include="Views\MainListIssuingCard\ViewAndApprove.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_SearchPanel.cshtml" />
+    <Content Include="Views\ViewIssuingCard\editcard.cshtml" />
+    <Content Include="Views\ViewIssuingCard\index.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Styles\bootstrap-3.3.4-dist\css\bootstrap-theme.css.map" />
+    <Content Include="Styles\bootstrap-3.3.4-dist\css\bootstrap.css.map" />
+    <Content Include="Styles\bootstrap-3.3.4-dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Styles\bootstrap-3.3.4-dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Styles\bootstrap-3.3.4-dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Styles\bootstrap-3.3.4-dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Views\ADJOrTransfer\Index.cshtml" />
+    <Content Include="Views\ADJOrTransfer\ListAccountData.cshtml" />
+    <Content Include="Views\ADJOrTransfer\ListCardData.cshtml" />
+    <Content Include="Views\ADJOrTransfer\MenuSearchAccount.cshtml" />
+    <Content Include="Views\ADJOrTransfer\QueryInfoCreditDebt.cshtml" />
+    <Content Include="Views\ADJOrTransfer\ViewAndADJOrTransfer.cshtml" />
+    <Content Include="Views\ADJOrTransfer\_SearchPanel.cshtml" />
+    <Content Include="Views\ApproveADJTransfer\Index.cshtml" />
+    <Content Include="Views\ApproveADJTransfer\SearchData.cshtml" />
+    <Content Include="Views\ApproveADJTransfer\_SearchPanel.cshtml" />
+    <Content Include="Views\ApproveCreditCardPayment\DataListCreditPayment.cshtml" />
+    <Content Include="Views\ApproveCreditCardPayment\Index.cshtml" />
+    <Content Include="Views\ApproveCreditCardPayment\ViewOnly.cshtml" />
+    <Content Include="Views\ApproveEditClient\Index.cshtml" />
+    <Content Include="Views\ApproveEditClient\SearchData.cshtml" />
+    <Content Include="Views\ApproveEditClient\ViewAndApprove.cshtml" />
+    <Content Include="Views\ApproveImportCard\Index.cshtml" />
+    <Content Include="Views\ApproveImportCard\SearchData.cshtml" />
+    <Content Include="Views\ApproveImportCard\ShowDetail.cshtml" />
+    <Content Include="Views\ApproveImportCard\_SearchPanel.cshtml" />
+    <Content Include="Views\ApproveImportCif\Index.cshtml" />
+    <Content Include="Views\ApproveImportCif\SearchData.cshtml" />
+    <Content Include="Views\ApproveImportCif\ShowDetail.cshtml" />
+    <Content Include="Views\ApproveImportCif\ViewApprove.cshtml" />
+    <Content Include="Views\ApproveImportCif\_SearchPanel.cshtml" />
+    <Content Include="Views\ApproveRenewalCard\Index.cshtml" />
+    <Content Include="Views\ApproveRenewalCard\SearchData.cshtml" />
+    <Content Include="Views\ApproveRenewalCard\ViewInfo.cshtml" />
+    <Content Include="Views\ApproveRenewalCard\_SearchPanel.cshtml" />
+    <Content Include="Views\ApproveReplaceCard\Index.cshtml" />
+    <Content Include="Views\ApproveReplaceCard\SearchData.cshtml" />
+    <Content Include="Views\ApproveReplaceCard\ViewInfo.cshtml" />
+    <Content Include="Views\BCChiTietTinhLai\Index.cshtml" />
+    <Content Include="Views\BCChiTietTinhLai\SearchData.cshtml" />
+    <Content Include="Views\BCChiTietTinhLai\_SearchPanel.cshtml" />
+    <Content Include="Views\CreditCardPayment\GetInfoContract.cshtml" />
+    <Content Include="Views\CreditCardPayment\Index-COPY.cshtml" />
+    <Content Include="Views\CreditCardPayment\Index.cshtml" />
+    <Content Include="Views\CreditCardPayment\ListAccountData.cshtml" />
+    <Content Include="Views\CreditCardPayment\ListCardData.cshtml" />
+    <Content Include="Views\CreditCardPayment\MenuSearchAccount.cshtml" />
+    <Content Include="Views\CreditCardPayment\MenuSearchCard.cshtml" />
+    <Content Include="Views\CreditCardPayment\QueryInfoCreditDebt.cshtml" />
+    <Content Include="Views\CreditCardPayment\ScreenCreditPayment.cshtml" />
+    <Content Include="Views\CreditReport\Index.cshtml" />
+    <Content Include="Views\CustomerServices\AdvanceSearch.cshtml" />
+    <Content Include="Views\CustomerServices\AdvanceSearch_Result.cshtml" />
+    <Content Include="Views\CustomerServices\CardInfoPartial.cshtml" />
+    <Content Include="Views\CustomerServices\ClassifierPartial.cshtml" />
+    <Content Include="Views\CustomerServices\ClientPartial.cshtml" />
+    <Content Include="Views\CustomerServices\Index.cshtml" />
+    <Content Include="Views\Demo\Index.cshtml" />
+    <Content Include="Views\Demo\SearchData.cshtml" />
+    <Content Include="Views\Demo\ShowDetail.cshtml" />
+    <Content Include="Views\Demo\ViewUpLoad.cshtml" />
+    <Content Include="Views\Demo\_SearchPanel.cshtml" />
+    <Content Include="Views\ImportCard\Index - Copy.cshtml" />
+    <Content Include="Views\ImportCard\Index.cshtml" />
+    <Content Include="Views\ImportCard\LockCard\CardDialog_PartialPage.cshtml" />
+    <Content Include="Views\ImportCard\LockCard\CardGrid_Fast_PartialPage.cshtml" />
+    <Content Include="Views\ImportCard\LockCard\CardGrid_PartialPage.cshtml" />
+    <Content Include="Views\ImportCard\LockCard\ClientGrid_PartialPage.cshtml" />
+    <Content Include="Views\ImportCard\Main.cshtml" />
+    <Content Include="Views\ImportCard\SearchData - Copy.cshtml" />
+    <Content Include="Views\ImportCard\SearchData.cshtml" />
+    <Content Include="Views\ImportCard\_SearchPanel.cshtml" />
+    <Content Include="Views\ImportCif\Index.cshtml" />
+    <Content Include="Views\ImportCif\SearchData.cshtml" />
+    <Content Include="Views\ImportCif\_SearchPanel.cshtml" />
+    <Content Include="Views\ImportExcelCard\Index.cshtml" />
+    <Content Include="Views\ImportExcelCard\SearchData.cshtml" />
+    <Content Include="Views\ImportExcelCard\ShowDetail.cshtml" />
+    <Content Include="Views\ImportExcelCard\_SearchPanel.cshtml" />
+    <Content Include="Views\IssuingCardsInbox\Index.cshtml" />
+    <Content Include="Views\IssuingCardsInbox\SearchData.cshtml" />
+    <Content Include="Views\IssuingManagerment\Index.cshtml" />
+    <Content Include="Views\IssuingManagerment\SearchData.cshtml" />
+    <Content Include="Views\IssuingManagerment\ViewClientInfoParial.cshtml" />
+    <Content Include="Views\IssuingSearchAdv\SearchData.cshtml" />
+    <Content Include="Views\IssuingSearchAdv\shwDialog.cshtml" />
+    <Content Include="Views\LockCard\SearchData.cshtml" />
+    <Content Include="Views\LockCard\ViewAndLock.cshtml" />
+    <Content Include="Views\LockCard\_SearchPanel.cshtml" />
+    <Content Include="Views\MainIssuingCard\search.cshtml" />
+    <Content Include="Views\MainIssuingCard\SearchAccType.cshtml" />
+    <Content Include="Views\MainIssuingCard\SearchOCustomer.cshtml" />
+    <Content Include="Views\MainIssuingCard\_CustomerInfo_Partial.cshtml" />
+    <Content Include="Views\MainIssuingCard\_DebitCardInfo_Partial.cshtml" />
+    <Content Include="Views\MainIssuingCreditCard\ClassifierByProductCode.cshtml" />
+    <Content Include="Views\MainIssuingCreditCard\Index.cshtml" />
+    <Content Include="Views\MainIssuingCreditCard\ListMainSubCard.cshtml" />
+    <Content Include="Views\MainIssuingCreditCard\SearchCardProduct.cshtml" />
+    <Content Include="Views\MainIssuingCreditCard\SearchCollateral.cshtml" />
+    <Content Include="Views\MainIssuingCreditCard\SearchContractNumber.cshtml" />
+    <Content Include="Views\MainIssuingCreditCard\SearchContractNumber_Result.cshtml" />
+    <Content Include="Views\MainIssuingCreditCard\SearchOCustomer.cshtml" />
+    <Content Include="Views\MainIssuingCreditCard\SearchSaler.cshtml" />
+    <Content Include="Views\MainIssuingCreditCard\_CreditCardInfo_Partial.cshtml" />
+    <Content Include="Views\MainIssuingCreditCard\_CustomerInfo_Partial.cshtml" />
+    <Content Include="Views\MainListIssuingCard\SearchData - Copy.cshtml" />
+    <Content Include="Views\MainListIssuingCard\ViewAndEdit.cshtml" />
+    <Content Include="Views\MainListIssuingCard\ViewIssuingCardOnly.cshtml" />
+    <Content Include="Views\MB06\PDF_MB06.cshtml" />
+    <Content Include="Views\RenewalCard\Index.cshtml" />
+    <Content Include="Views\RenewalCard\SearchData.cshtml" />
+    <Content Include="Views\RenewalCard\ViewAndRenew.cshtml" />
+    <Content Include="Views\RenewalCard\ViewAndRenewal.cshtml" />
+    <Content Include="Views\RenewalCard\_SearchPanel.cshtml" />
+    <Content Include="Views\ReplaceCard\Index.cshtml" />
+    <Content Include="Views\ReplaceCard\SearchData.cshtml" />
+    <Content Include="Views\ReplaceCard\ViewAndReplace.cshtml" />
+    <Content Include="Views\ReportExcel\Index.cshtml" />
+    <Content Include="Views\ReportExcel\_SearchPanel.cshtml" />
+    <Content Include="Views\ViewBalance\Index.cshtml" />
+    <Content Include="Views\ViewIssuingCard\EditCreditCard.cshtml" />
+    <Content Include="Views\ViewIssuingCard\EditCreditCard_Partial.cshtml" />
+    <Content Include="Views\ViewIssuingCard\EditDebitCard.cshtml" />
+    <Content Include="Views\ViewIssuingCard\EditDebitCard_Partial.cshtml" />
+    <Content Include="Views\ViewIssuingCard\Template\PDF_KT09A.cshtml" />
+    <Content Include="Views\ViewIssuingCard\Template\PDF_MB06.cshtml" />
+    <Content Include="Views\ViewIssuingCard\ViewOnly_Credit.cshtml" />
+    <Content Include="Views\ViewIssuingCard\ViewOnly_Credit_Partial.cshtml" />
+    <Content Include="Views\ViewIssuingCard\ViewOnly_Debit.cshtml" />
+    <Content Include="Views\ViewIssuingCard\ViewOnly_Debit_Partial.cshtml" />
+    <Content Include="Views\ViewIssuingCard\_CreditCardInfo_Partial.cshtml" />
+    <Content Include="Views\ViewIssuingCard\_CustomerInfo_Partial.cshtml" />
+    <Content Include="Views\ViewIssuingCard\_DebitCardInfo_Partial.cshtml" />
+    <Content Include="Views\RenewalCard\_SearchPanelV2.cshtml" />
+    <Content Include="Views\ChangeCardStatus\Index.cshtml" />
+    <Content Include="Views\ChangeCardStatus\ViewAndChangeStatus.cshtml" />
+    <Content Include="Views\ApproveChangeCardStatus\Index.cshtml" />
+    <Content Include="Views\ApproveChangeCardStatus\ApproveLockCard_PartialPage.cshtml" />
+    <Content Include="Views\ApproveChangeCardStatus\ApproveCardDialog_PartialPage.cshtml" />
+    <Content Include="Views\ActiveCard\_ActiveInformation.cshtml" />
+    <Content Include="Views\ActiveCard\Empty.cshtml" />
+    <Content Include="Views\ReplaceCard\Empty.cshtml" />
+    <Content Include="Views\ReplaceCard\_ActiveInformation.cshtml" />
+    <Content Include="Views\CardStatusChangeHistory\Index.cshtml" />
+    <Content Include="Views\CardHistory\AdvanceSearch.cshtml" />
+    <Content Include="Views\CardHistory\AdvanceSearch_Result.cshtml" />
+    <Content Include="Views\CardHistory\CardInfoPartial.cshtml" />
+    <Content Include="Views\CardHistory\ClassifierPartial.cshtml" />
+    <Content Include="Views\CardHistory\ClientPartial.cshtml" />
+    <Content Include="Views\CardHistory\HistoryPartial.cshtml" />
+    <Content Include="Views\CardHistory\Index.cshtml" />
+    <Content Include="Views\CardHistory\SearchData.cshtml" />
+    <Content Include="Views\CardStatusChangeHistory\SearchData.cshtml" />
+    <Content Include="Views\ApproveReplaceCard\_SearchPanel.cshtml" />
+    <Content Include="Views\MainIssuingSubCreditCard\ClassifierByProductCode.cshtml" />
+    <Content Include="Views\MainIssuingSubCreditCard\Index.cshtml" />
+    <Content Include="Views\MainIssuingSubCreditCard\ListMainSubCard.cshtml" />
+    <Content Include="Views\MainIssuingSubCreditCard\SearchCardProduct.cshtml" />
+    <Content Include="Views\MainIssuingSubCreditCard\SearchCollateral.cshtml" />
+    <Content Include="Views\MainIssuingSubCreditCard\SearchContractNumber.cshtml" />
+    <Content Include="Views\MainIssuingSubCreditCard\SearchContractNumber_Result.cshtml" />
+    <Content Include="Views\MainIssuingSubCreditCard\SearchLO.cshtml" />
+    <Content Include="Views\MainIssuingSubCreditCard\SearchOCustomer.cshtml" />
+    <Content Include="Views\MainIssuingSubCreditCard\SearchSaler.cshtml" />
+    <Content Include="Views\MainIssuingSubCreditCard\_CreditCardInfo_Partial.cshtml" />
+    <Content Include="Views\MainIssuingSubCreditCard\_CustomerInfo_Partial.cshtml" />
+    <Content Include="Views\ApproveEPINAllocation\Index.cshtml" />
+    <Content Include="Views\ApproveEPINAllocation\_SearchPanel.cshtml" />
+    <Content Include="Views\ClientInfoMgmt\Index.cshtml" />
+    <Content Include="Views\EPINAllocation\Index.cshtml" />
+    <Content Include="Views\MainListIssuingCardNew\Index.cshtml" />
+    <Content Include="Views\MainListIssuingCardNew\SearchData.cshtml" />
+    <Content Include="Views\MainListIssuingCardNew\SearchPanel.cshtml" />
+    <Content Include="Views\MainListIssuingCardNew\ViewAndApprove.cshtml" />
+    <Content Include="Views\MainListIssuingCardNew\ViewAndEdit.cshtml" />
+    <Content Include="Views\MainListIssuingCardNew\ViewIssuingCardOnly.cshtml" />
+    <Content Include="Views\ViewIssuingSubCard\editcard.cshtml" />
+    <Content Include="Views\ViewIssuingSubCard\EditCreditCard.cshtml" />
+    <Content Include="Views\ViewIssuingSubCard\EditCreditCard_Partial.cshtml" />
+    <Content Include="Views\ViewIssuingSubCard\EditDebitCard.cshtml" />
+    <Content Include="Views\ViewIssuingSubCard\EditDebitCard_Partial.cshtml" />
+    <Content Include="Views\ViewIssuingSubCard\index.cshtml" />
+    <Content Include="Views\ViewIssuingSubCard\Template\PDF_KT09A - Copy.cshtml" />
+    <Content Include="Views\ViewIssuingSubCard\Template\PDF_KT09A.cshtml" />
+    <Content Include="Views\ViewIssuingSubCard\Template\PDF_KT09A_bk.cshtml" />
+    <Content Include="Views\ViewIssuingSubCard\Template\PDF_MB06.cshtml" />
+    <Content Include="Views\ViewIssuingSubCard\ViewOnly_Credit.cshtml" />
+    <Content Include="Views\ViewIssuingSubCard\ViewOnly_Credit_Partial.cshtml" />
+    <Content Include="Views\ViewIssuingSubCard\ViewOnly_Debit.cshtml" />
+    <Content Include="Views\ViewIssuingSubCard\ViewOnly_Debit_Partial.cshtml" />
+    <Content Include="Views\ViewIssuingSubCard\_CreditCardInfo_Partial.cshtml" />
+    <Content Include="Views\ViewIssuingSubCard\_CustomerInfo_Partial.cshtml" />
+    <Content Include="Views\ViewIssuingSubCard\_DebitCardInfo_Partial.cshtml" />
+    <Content Include="Views\WithdrawStatementReport\Index.cshtml" />
+    <Content Include="Views\ApproveADJTransfer\ViewDetail.cshtml" />
+    <Content Include="Views\IssuingDebitCards\index.cshtml" />
+    <Content Include="Views\IssuingDebitCards\search.cshtml" />
+    <Content Include="Views\IssuingDebitCards\SearchAccType.cshtml" />
+    <Content Include="Views\IssuingDebitCards\SearchContractNumber.cshtml" />
+    <Content Include="Views\IssuingDebitCards\SearchContractNumber_Result.cshtml" />
+    <Content Include="Views\IssuingDebitCards\SearchOCustomer.cshtml" />
+    <Content Include="Views\IssuingDebitCards\_CustomerInfo_Partial.cshtml" />
+    <Content Include="Views\IssuingDebitCards\_DebitCardInfo_Partial.cshtml" />
+    <Content Include="Views\ViewIssuingSubCard\Template\PDF_TND02.cshtml" />
+    <Content Include="Views\RenewCard\Empty.cshtml" />
+    <Content Include="Views\RenewCard\Index.cshtml" />
+    <Content Include="Views\RenewCard\_ActiveInformation.cshtml" />
+    <Content Include="Views\RenewCard\_SearchPanel.cshtml" />
+    <Content Include="Views\ReplaceCard\_SearchPanel.cshtml" />
+    <Content Include="Views\MainIssuingCreditCard\SearchLO.cshtml" />
+    <Content Include="Views\NangHanMucTheCredit\Index.cshtml" />
+    <Content Include="Views\NangHanMucTheCredit\ProcessUpload.cshtml" />
+    <Content Include="Views\NangHanMucTheCredit_Duyet\Index.cshtml" />
+    <Content Include="Views\NangHanMucTheCredit_Duyet\PageXacNhanChuyenDuyet.cshtml" />
+    <Content Include="Views\NangHanMucTheCredit\KetQuaUpload.cshtml" />
+    <Content Include="Views\NangHanMucTheCredit\XemKQDuyet.cshtml" />
+    <Content Include="Views\NangHanMucCredit_BaoCao\Index.cshtml" />
+    <Content Include="Views\ActiveCardsInput\Index.cshtml" />
+    <Content Include="Views\ActiveCardsApprove\Index.cshtml" />
+    <Content Include="Views\ActiveCardsApprove\DanhSachChiTiet.cshtml" />
+    <Content Include="Views\ActiveCardsReport\Index.cshtml" />
+    <Content Include="Views\ActiveCardsApprove\TimKiem.cshtml" />
+    <Content Include="Views\ActiveCardsApprove\CheckDataBeforeApprove.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Scripts\Vendor\Main\img\" />
+    <Folder Include="Scripts\Vendor\Main\js\" />
+    <Folder Include="Views\InfoCustChangeHistory\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBManager\DBManager.csproj">
+      <Project>{4c9d838e-cd22-4162-a9ea-0cd7c0b6b152}</Project>
+      <Name>DBManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Models\CrystalReport5.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport52.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>64952</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:64952/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

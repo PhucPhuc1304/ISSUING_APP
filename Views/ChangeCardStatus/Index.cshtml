@@ -1,0 +1,781 @@
+﻿@using ISSUING_APP.Models;
+@{
+    ViewBag.Title = "Index";
+    List<CBoxData> lsCardType = ViewData["lsCardType"] as List<CBoxData>;
+}
+
+<link href="/Scripts/Vendor/dataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="/Scripts/Vendor/dataTables/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+<script src="/Scripts/Vendor/dataTables/js/jquery.dataTables.min.js"></script>
+<script src="/Scripts/Vendor/dataTables/js/dataTables.bootstrap.min.js"></script>
+<script src="/Scripts/Vendor/dataTables/js/dataTables.fixedHeader.min.js"></script>
+<script src="/Scripts/Vendor/dataTables/js/dataTables.fixedColumns.min.js"></script>
+<link href="/Scripts/Vendor/SelectOption/css/jquery-customselect-1.9.1.css" rel="stylesheet" />
+<script src="/Scripts/Vendor/SelectOption/js/jquery-customselect-1.9.1.min.js"></script>
+<script src="/Scripts/Vendor/FileCss/bootstrap-filestyle.min.js"></script>
+
+<link href="/Scripts/Vendor/Main/css/Style.css" rel="stylesheet" />
+<script src="/Scripts/Vendor/Main/js/common.js"></script>
+
+<style>
+    .lblStatusApprove {
+        position: absolute;
+        top: 0px;
+        right: 10px;
+        font-weight: bold;
+        color: #b02c26;
+    }
+
+    #dlgReview {
+        padding: 0px !important;
+        margin: 0px !important;
+    }
+
+    .ui-dialog-titlebar-close {
+        /*background-color: #f8c414;*/
+    }
+
+    .font-weight-bold {
+        font-weight: bold;
+    }
+
+    .open > .dropdown-menu {
+        z-index: 9999;
+    }
+
+    #content {
+        margin-top: 64px;
+        margin-bottom: 40px;
+    }
+
+    .row {
+        padding: 2px;
+    }
+
+    .alert-success {
+        bottom: 0px;
+        position: fixed;
+        right: 0px;
+        width: 100%;
+    }
+
+    .page {
+        min-height: unset;
+        width: unset;
+        padding: 0px;
+        margin-bottom: 0px;
+        margin-top: 50px;
+    }
+
+    .subpage {
+        height: unset;
+        outline: unset;
+        border: 0px #fff solid;
+    }
+
+    .radio {
+        padding-top: 5px;
+    }
+
+    input[type=checkbox] {
+        height: 17px;
+        width: 17px;
+    }
+
+    #tbDataList,
+    #tbDataList_S2,
+    #cashbulk {
+        margin: 0px;
+    }
+
+    .mnHide {
+        background-color: #fff !important;
+        color: #ccc !important;
+    }
+
+    .tdEmpty {
+        background: #fff !important;
+        border-color: #fff !important;
+    }
+
+    .dataTables_info {
+        /*display: none;*/
+    }
+
+    #tbDataList_filter {
+    }
+
+    #tbDataList_S2_filter,
+    #tbDataList_S2_info,
+    #cashbulk_filter {
+        display: none;
+    }
+
+    .Error {
+        color: red;
+        font-weight: bold;
+    }
+
+    .book {
+        padding-top: 15px;
+    }
+
+    .colorRed {
+        color: #b02c26;
+    }
+
+    .header-group h2 {
+        margin-top: 20px;
+    }
+
+    .optGroup {
+        position: relative;
+        border: 1px solid #c7b4d1;
+        display: inline-table;
+        width: 369px;
+        padding: 5px 0px;
+        margin-left: 12px;
+    }
+
+    .calcGrandTotal_Wrapper {
+        position: absolute;
+        top: -6px;
+        left: 0px;
+        padding: 15px 48px;
+        border: 1px solid #f8c414;
+    }
+
+    .calcGrandTotal {
+        font-weight: bold;
+        float: right;
+    }
+
+    .lblRow {
+        top: 10px;
+    }
+
+    .group-title {
+        border-top: 1px solid #f8c414;
+        border-bottom: 1px solid #f8c414;
+    }
+
+    #tbDataList_child_filter, #tbDataList_child_info,
+    #tbDataList_filter, #tbDataList_info {
+        display: none;
+    }
+
+    input[readonly] {
+        background-color: #f7f2f2 !important;
+    }
+
+    .frm-date {
+        width: 93px !important;
+        margin: 0px;
+    }
+
+    .form-text {
+        border: 1px solid #c7b4d1;
+        border-radius: 4px;
+        margin-right: 5px;
+        padding: 0px 5px;
+        line-height: 32px;
+        height: 26px;
+        width: 255px;
+        font-size: 12px !important;
+    }
+
+    .btnDateTime {
+        height: 26px;
+        left: -11px;
+        position: relative;
+        top: 0px;
+        border: 1px solid #c7b4d1;
+    }
+    /*begin: jquery-ui*/
+    .ui-widget {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+    }
+
+    .ui-tabs .ui-tabs-panel {
+        padding: 5px;
+    }
+
+    .ui-widget-header {
+        font-weight: normal;
+        border-radius: 3px 3px 10px 10px;
+        box-shadow: 1px 1px 1px #ae514d;
+    }
+
+    .ui-tabs .ui-tabs-nav {
+        padding: 0px;
+        margin: 0px;
+        border: 1px solid #aaa;
+        background: url(/Content/Images/frm_bg_footer.jpg) !important;
+        background-repeat: round;
+    }
+
+    .ui-datepicker th {
+        font-weight: normal;
+        padding: .1em .0em;
+    }
+
+    .ui-datepicker table {
+        font-size: .7em;
+    }
+
+    .ui-datepicker {
+        width: 13em;
+    }
+
+    .ui-datepicker-month,
+    .ui-datepicker-year {
+        font-size: 12px !important;
+        border: 1px solid #c7b4d1;
+    }
+
+    .ui-tabs .ui-tabs-panel {
+        overflow: hidden;
+        padding: 0px;
+    }
+
+    .ui-tabs .ui-tabs-nav li.ui-tabs-active a {
+        background-color: #b02c26;
+        color: #fff;
+    }
+
+    /*end: jquery-ui*/
+
+    .lbl {
+        padding-top: 5px;
+    }
+
+    button, html input[type="button"], input[type="reset"], input[type="submit"] {
+        height: 30px;
+    }
+
+    .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group {
+        margin-left: -1px;
+        height: 30px;
+    }
+
+    .bootstrap-filestyle {
+        width: 100%;
+    }
+
+    .group-span-filestyle {
+        width: 1px;
+    }
+</style>
+
+<div id="dlgMsg">
+    <div id="MsgContext"></div>
+</div>
+<div id="dlgReview" style="display:none;">
+    <div id="dlgReviewWrapper" style="margin-bottom:10px;"></div>
+</div>
+
+<div class="container body-content">
+    <div class="book">
+        <div class="page">
+            <div class="subpage">
+                <div class="section-title" style="position:relative; text-align:center; ">
+                    <b>Tìm kiếm thông tin</b>
+                </div>
+                @{
+                    Html.RenderPartial("../RenewalCard/_SearchPanelV2");
+                }
+                @*<div class="container section-01 section-02">
+                    <div class="row subsection-title">
+                        Thông tin thẻ
+                    </div>
+                    <div style="min-height:450px;">
+                        <div id="CardLock_Wrapper">
+                            <!-- todo -->
+                            <div class="body-content">
+                                <div class="book" style="padding:0px;">
+                                    <div class="page" style="margin:0px;">
+                                        <div class="subpage">*@
+                <div id="CardLock_Wrapper">
+                    <div class="container section-01 section-03">
+                        <div class="row subsection-title" style="padding: 5px;">
+                            <div class="col-lg-6 col-md-6 text-center" style="color: #b02c26;">THÔNG TIN CHỦ THẺ: Trạng thái thẻ </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2 norwap"> Tên khách hàng </div> <div class="col-sm-4"> <label ID="txtCLIENT_SHORT_NAME" text="" class="form-control" style="width:100%"></label></div>
+                            <div class="col-sm-2 norwap"> CMND/Passport </div>
+                            <div class="col-sm-4 norwap">
+                                <label ID="txtREG_NUMBER" text="" class="form-control" style="width:100%"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2 norwap"> Ngày sinh </div> <div class="col-sm-4">
+                                <label ID="txtCLIENT_BIRTH_DATE" text="" class="form-control" style="width:100%">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2 norwap"> Mã CIF </div> <div class="col-sm-4"> <label ID="txtCLIENT_NUMBER" text="" class="form-control" style="width:100%"></label></div>
+                            <div class="col-sm-2 norwap"> Ngày mở CIF</div> <div class="col-sm-4">
+                                <label ID="txtCLIENT_OPEN_DATE" class="form-control" style="width:100%">
+
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2 norwap"> Điện thoại  </div> <div class="col-sm-4">
+                                <label ID="txtCLIENT_PHONE" text="" class="form-control" style="width:100%"></label>
+
+                            </div>
+                            <div class="col-sm-2 norwap"> ĐT Nhà </div> <div class="col-sm-4"> <label ID="txtCLIENT_PHONE_H" text="" class="form-control" style="width:100%"></label></div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2 norwap"> ĐT di động </div> <div class="col-sm-4"> <label ID="txtCLIENT_PHONE_M" text="" class="form-control" style="width:100%"></label></div>
+                            <div class="col-sm-2 norwap"> Email </div> <div class="col-sm-4"> <label ID="txtCLIENT_EMAIL" text="" class="form-control" style="width:100%"></label></div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2 norwap"> Địa chỉ KH </div> <div class="col-sm-10"> <label ID="txtCLIENT_ADDRESS_LINE" text="" class="form-control" style="width:100%"></label></div>
+                            <div class="col-sm-2 norwap" style="display:none"> ID thẻ </div> <div class="col-sm-4" style="display:none"> <label ID="txtACNT_CONTRACT_ID" text="" class="form-control" style="width:100%"></label></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2 norwap"> Số thẻ </div> <div class="col-sm-4"> <label ID="txtCONTRACT_NUMBER" text="" class="form-control" style="width:100%"></label></div>
+                            <div class="col-sm-2 norwap"> Tên thẻ </div> <div class="col-sm-4"> <label ID="txtCONTRACT_NAME" text="" class="form-control" style="width:100%"></label></div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2 norwap"> Loại thẻ </div> <div class="col-sm-4"> <label ID="txtCONTR_TYPE_NAME" text="" class="form-control" style="width:100%"></label></div>
+                            <div class="col-sm-2 norwap"> Thẻ chính | thẻ phụ </div> <div class="col-sm-4"> <label ID="txtINTERVAL_TYPE" text="" class="form-control" style="width:100%"></label></div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2 norwap"> Trạng thái thẻ </div> <div class="col-sm-4"> <label ID="txtCONTR_STATUS" text="" class="form-control" style="width:100%"></label></div>
+                            <div class="col-sm-2 norwap"> Ngày mở thẻ </div> <div class="col-sm-4">
+                                <label ID="txtDATE_OPEN" text="" class="form-control" style="width:100%">
+
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2 norwap"> Đã hết hạn </div> <div class="col-sm-4"> <label ID="txtDate_EXPIRE" text="" class="form-control" style="width:100%"></label></div>
+                            <div class="col-sm-2 norwap"> Trạng thái sản phẩm </div> <div class="col-sm-4"> <label ID="txtPRODUCTION_STATUS" text="" class="form-control" style="width:100%"></label></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2 norwap"> Tên Sản phẩm </div> <div class="col-sm-4"> <label ID="txtPRODUCT_NAME" text="" class="form-control" style="width:100%"></label></div>
+
+                            <div class="col-sm-2 norwap"> Tên ĐV tạo thẻ </div> <div class="col-sm-4"> <label ID="txtCARD_BRANCH_NAME" text="" class="form-control" style="width:100%"></label></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2 norwap">Số hợp đồng</div> <div class="col-sm-4"> <label ID="txtLOC_ACCT" text="" class="form-control" style="width:100%; font-weight: bold;"></label></div>
+
+                            <div class="col-sm-2 norwap"> Tình trạng hợp đồng</div> <div class="col-sm-4"> <label ID="txtLOC_ACCT_STATUS" text="" class="form-control" style="width:100%; font-weight: bold;"></label></div>
+                        </div>
+                    </div>
+                    <div class="container section-01 section-02">
+                        <div class="row" style="padding: 5px;">
+                            <div class="col-lg-6 col-md-6 text-center" style="color: #b02c26;">THÔNG TIN THAY ĐỔI TRẠNG THÁI THẺ</div>
+                        </div>
+                        <div class="row" style="padding: 5px;">
+                            <div class="col-sm-4"> Trạng thái muốn thay đổi: </div>
+                            <div class="col-sm-8">
+                                <select id="ddlP_LOCK_TYPE" class="form-control" style="width: 100%" disabled>
+                                    <option value="">Chọn trạng thái</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="divP_LOCK_TIME" class="row" style="display: none; padding: 5px;">
+                            @*<div class="col-sm-2"> Từ ngày </div>
+                            <div class="col-sm-4">
+                                <div class="datepicker-wrap">
+                                    <div class="input-group" style="display: inherit;">
+                                        <input type="text" id="txtP_LOCK_FROM" size="10" style="width:80%" class="form-control" value="20/03/2019">
+                                        <span class="input-group-btn" style="top: 0px;left: 0px;">
+                                            <button class="btn btn-default colorRed" type="button" id="btnFromDate" style="width:42px;height:30px;"><i class="glyphicon glyphicon-calendar" aria-hidden="true"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>*@
+                            <div class="col-sm-2"> Đến ngày </div>
+                            <div class="col-sm-4">
+                                <div class="input-group" style="display: inherit;">
+                                    <input type="text" id="txtP_LOCK_TO" size="10" style="width:80%" class="form-control" value="20/03/2019">
+                                    <span class="input-group-btn" style="top: 0px;left: 0px;">
+                                        <button class="btn btn-default colorRed" type="button" id="btnToDate" style="width:42px;height:30px;"><i class="glyphicon glyphicon-calendar" aria-hidden="true"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding: 5px;">
+                            <div class="col-sm-4"> Lý do </div>
+                            <div class="col-sm-8">
+                                <input id="txtP_REASON" class="form-control" style="width:100%;" />
+                            </div>
+                        </div>
+                        <div class="row" style="padding: 5px;">
+                            <div class="col-sm-4"> File đính kèm </div>
+                            <div class="col-sm-6">
+                                <input type="file" id="fileUpload" name="file" style="width:100%" accept="image/jpeg,image/jpg,application/pdf" />
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="button" id="btnUpload" value="Upload" onclick="doUpload()" />
+                            </div>
+                        </div>
+                        <div class="row" style="padding: 5px;">
+                            <div class="col-sm-12 text-center">
+                                <button type="button" class="btn btn-primary" style="padding:0px 20px;" id="searchData" onclick="SaveAction();">Thay đổi</button>
+                            </div>
+                        </div>
+                        <div class="row" style="padding: 5px;">
+                            <div class="col-sm-10">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*</div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+<div class="alert alert-danger" id="success-alert" style="display:none;">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <div id="AlertMessage"></div>
+</div>
+@*</div>
+    </div>*@
+<input type="hidden" id="hdFileName" name="hdFileName" />
+
+<script type="text/javascript">
+    var tblDataHtml;
+    function InitDataTable() {
+        var t = $('#tbDataList').DataTable({
+            scrollY: 400,
+            scrollX: true,
+            scrollCollapse: true,
+            paging: false,
+            "order": [],
+            "columnDefs": [{
+                "targets": 'no-sort',
+                "orderable": false
+            }],
+            "columns": [
+                { "width": "60px", "orderable": false },
+                { "width": "120px", "orderable": "true" },
+                { "width": "120px" },
+                { "width": "120px", "type": "html-num-fmt" },
+                { "width": "120px", "type": "html-num-fmt" },
+                { "width": "120px", "type": "html-num-fmt" },
+                { "width": "120px", "type": "html-num-fmt" },
+                { "width": "150px", "type": "html-num-fmt" },
+                { "width": "120px", "type": "html-num-fmt" },
+                { "width": "120px", "visible": true },
+                { "width": "120px", "visible": true },
+                { "width": "120px", "visible": true },
+                { "width": "120px", "visible": true },
+                { "width": "120px", "visible": true },
+                { "width": "120px", "visible": true },
+                { "width": "120px", "visible": true },
+                { "width": "120px", "visible": true },
+                { "width": "120px", "visible": true },
+            ],
+            fixedColumns: { leftColumns: 4 },
+        });
+    };
+
+
+
+    function doSearch(value) {
+        shwLoading(true);
+        $.post('/ChangeCardStatus/SearchData', {
+            OP_CARD_NUMBER: !value ? $("#txtOP_CARD_NUMBER").val() : value
+        }, function (data, status) {
+            if (!data.code) {
+                $('#CardLock_Wrapper').html(data);
+            } else {
+                showAlert({ title: 'Cảnh báo', message: data.message });
+            }
+        })
+        .done(function () { })
+        .fail(function (e) { showAlert({ title: 'Cảnh báo', message: 'Có lỗi trong quá trình thực hiện truy vấn!' }); })
+        .always(function () { shwLoading(false); });
+    };
+
+    function doShowLockCard(Req_Ac_Id, card_type) {
+        shwLoading(true);
+        $("#ddlP_LOCK_TYPE").attr("disabled", "disabled");
+        $("#ddlP_LOCK_TYPE").val(card_type);
+        if (card_type == '2') {
+            $("#divP_LOCK_TIME").hide();
+            $("#dvCardCode").hide();
+            $("#divP_Ly_DO").hide();
+        }
+        else {
+            $("#divP_LOCK_TIME").show();
+            $("#dvCardCode").show();
+            $("#divP_Ly_DO").show();
+        }
+        $.post('/LockCard/doShowAction', {
+            OP_ACNT_CONTRACT_ID: Req_Ac_Id, OP_CARD_TYPE: card_type
+        }, function (data, status) {
+            objDlg = $("#dlgReview").dialog({
+                title: "Xem và nhập lệnh",
+                modal: true,
+                width: '900px',
+                height: 'auto',
+                resizable: false,
+                open: function () {
+                    $('#dlgReviewWrapper').html(data);
+                },
+                position: { my: "center", at: "center", of: window }
+            });
+        }).done(function () { $('.ui-widget').css("top", "65px"); })
+        .fail(function (e) { showAlert({ title: 'Cảnh báo', message: 'Có lỗi trong quá trình thực hiện truy vấn!' }); })
+        .always(function () { shwLoading(false); });
+    };
+
+
+    //added 20/05/19
+    function doUpload() {
+        var files = $("#fileUpload").get(0).files;
+        if (files.length == 0) {
+            shwMsg({ title: 'Thông báo', message: 'Chưa chọn file đính kèm. ', width: 350, callback: null });
+            return;
+        }
+        if (files[0].size > 5 * 1024 * 1024) {
+            shwMsg({ title: 'Thông báo', message: 'File quá lớn, chọn file có kicks thước <5MB. ', width: 350, callback: null });
+            return;
+        }
+        var acceptFileTypes = /^image\/(jpeg|jpg)$/i;
+        var acceptFileTypes2 = /^application\/(pdf)$/i;
+        if (!acceptFileTypes.test(files[0].type) && !acceptFileTypes2.test(files[0].type)) {
+            showAlert({ title: 'Cảnh báo', message: 'Chỉ được phép tải lên tập tin JPG hoac PDF!!!' });
+            return false;
+        }
+        shwLoading(true);
+
+        var fileData = new FormData();
+        fileData.append("fileUpload", files[0]);
+
+        $.ajax({
+            type: "POST",
+            url: "/ChangeCardStatus/UploadFiles",
+            dataType: "json",
+            contentType: false, // Not to set any content header
+            processData: false, // Not to process data
+            data: fileData,
+            success: function (result) {
+                $("#hdFileName").val(result);
+                shwMsg({ title: 'Thông báo', message: "Đã upload file", width: 350, callback: null });
+                shwLoading(false);
+            },
+            error: function (result) {
+                shwMsg({ title: 'Thông báo', message: 'Upload file không thành công.', width: 350, callback: null });
+                $("#hdFileName").val('');
+                shwLoading(false);
+            }
+        });
+    }
+
+    function changlockcode() {
+        var card_type = $("#ddlP_LOCK_TYPE").val();
+        var card_lock = $("#ddlP_LOCK_CODE").val();
+        if (card_type == '2') {
+            $("#divP_LOCK_TIME").hide();
+            $("#divP_Ly_DO").hide();
+            $("#dvCardCode").hide();
+        }
+        else {
+            $("#dvCardCode").show();
+            if (card_lock == '1') {
+                $("#divP_LOCK_TIME").show();
+                $("#divP_Ly_DO").show();
+            }
+            else {
+                $("#divP_LOCK_TIME").hide();
+                $("#divP_Ly_DO").hide();
+            }
+        }
+    }
+    function checkNullorEmpty(value) {
+        return !value;
+    }
+    //end
+    // Kiểm tra ngày tháng năm
+    function checkdatetime(name, text) {
+        if (checkNullorEmpty(text)) {
+            alert(name + " rỗng!"); // Cần thay đổi alert;
+            return true;
+        } else if (!isValidDate(text)) {
+            alert(name + " sai định dạng");
+            return true;
+        }
+        return false;
+    }
+    function isValidDate(s) {
+        var bits = s.split('/');
+        var d = new Date(bits[2], bits[1] - 1, bits[0]);
+        return d && (d.getMonth() + 1) == bits[1];
+    }
+
+    function SaveAction() {
+        var fn = $("#hdFileName").val();
+        var tenfile = null;
+        var duongdan = null;
+        if (fn.length > 0) {
+            var arr = fn.split(';');
+            if (arr.length == 2) {
+                tenfile = arr[0];
+                duongdan = arr[1];
+            }
+        }
+        var CONTR_STATUS_NAME = $('#txtP_CONTR_STATUS_NAME').val();
+
+        var LOC_ACCT = $('#txtLOC_ACCT').text();
+        var LOC_ACCT_STATUS = $('#txtLOC_ACCT_STATUS').text();
+        var IS_CLOSE_CONTRACT = $('#txtEnableClose').prop('checked') == true ? 'Y' : 'N';
+        var CONTR_STATUS_ACCT_CODE = $('#txtCONTR_STATUS_ACCT_CODE').val();
+        var CARD_PRODUCT_CODE = $('#txtCARD_PRODUCT_CODE').val();
+        var LOCK_TYPE_OLD = $("#LOCK_TYPE_OLD").val();
+
+        if (!CONTR_STATUS_NAME) {
+            shwMsg({ title: 'Thông báo', message: 'Vui lòng nhập thông tin', width: 350, callback: null });
+        }
+        if ($('#txtP_CONTR_STATUS_NAME').val())
+            var obj = {
+                OP_ACNT_CONTRACT_ID: $('#txtACNT_CONTRACT_ID').text(),
+                P_LOCKCARD_ID: ''
+                , P_LOCK_TYPE: $('#ddlP_LOCK_TYPE').val()
+                , P_LOCK_CODE: $('#ddlP_LOCK_CODE').val()
+                , P_LOCK_FROM: $('#txtP_LOCK_FROM').val()
+                , P_LOCK_TO: $('#txtP_LOCK_TO').val()
+                , P_NOTE: $('#txtP_NOTE').val(),
+                P_REASON: $('#txtP_REASON').val(),
+                P_BLD_CODE: $('#ddlP_LYDO').val(),
+                p_REG_NUMBER: $('#txtREG_NUMBER').text(),
+                P_CONTR_STATUS_NAME: CONTR_STATUS_NAME
+                , P_YC_FILENAME: tenfile//$('#ddlP_LYDO').val()
+                , P_YC_FILEPATH: duongdan//$('#ddlP_LYDO').val(),
+                , LOC_ACCT: LOC_ACCT
+                , CONTR_STATUS_ACCT_CODE: CONTR_STATUS_ACCT_CODE
+                , LOC_ACCT_STATUS: LOC_ACCT_STATUS
+                , CARD_PRODUCT_CODE: CARD_PRODUCT_CODE
+                , IS_CLOSE_CONTRACT: IS_CLOSE_CONTRACT
+                , LOCK_TYPE_OLD: LOCK_TYPE_OLD
+                }
+        if (obj.P_LOCK_TYPE == "C053") {
+            //if (checkdatetime("Từ ngày ", obj.P_LOCK_FROM) || checkdatetime("Đến ngày ", obj.P_LOCK_TO)) {
+            if (checkdatetime("Đến ngày ", obj.P_LOCK_TO)) {
+                return false;
+            }
+            var bitsTo = obj.P_LOCK_TO.split('/');
+            var dFrom = new Date();
+            var dTo = new Date(bitsTo[2], bitsTo[1] - 1, bitsTo[0]);
+            if (dFrom > dTo) {
+                alert("'Khóa thẻ đến ngày' phải lớn hơn ngày hiện tại");
+                return false;
+            }
+            //var bitsFrom = obj.P_LOCK_FROM.split('/');
+            //var bitsTo = obj.P_LOCK_TO.split('/');
+            //var dFrom = new Date(bitsFrom[2], bitsFrom[1] - 1, bitsFrom[0]);
+            //var dTo = new Date(bitsTo[2], bitsTo[1] - 1, bitsTo[0]);
+            //if (dFrom > dTo) {
+            //    alert("Từ ngày khóa thẻ đang lớn hơn đến ngày khóa thẻ");
+            //    return false;
+            //}
+        }
+        var urlIns_Upd = '/ChangeCardStatus/SaveAction';
+        if (!fn) {
+            if (!confirm("Bạn chưa upload file! Có muốn bỏ qua upload file không?")) {
+                return false;
+            }
+        }
+        debugger;
+        var cardTypeCode = $('#cardTypeCode').val();
+        if(cardTypeCode.indexOf("_CR_") > 0){
+            var debt = parseFloat($("#debt").val());
+            if (debt > 0 && obj.P_LOCK_TYPE == "C054") {
+                if (!confirm("Đề nghị kiểm tra dư nợ thẻ trước khi hủy!")) {
+                    return false;
+                }
+            }
+        }
+
+
+        shwLoading(true);
+        $.ajax({
+            url: urlIns_Upd,
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                shwLoading(false);
+                console.log(data);
+                if (data.code == '00') {
+                    shwMsg({ title: 'Thông báo', message: 'Lưu thành công!', width: 350, callback: function () { location.reload() } });
+                    // $(objDlg).dialog("close");
+                } else {
+                    shwMsg({ title: 'Thông báo', message: data.message, width: 350, callback: null });
+                    return false;
+                }
+            },
+            data: JSON.stringify(obj)
+        }).always(function () {
+            shwLoading(false);
+        });
+
+    }
+
+    $(document).ready(function () {
+        tblDataHtml = $('#content_wrapper').html();
+        InitDataTable();
+    });
+
+    $("#txtP_REASON").keyup(function () {
+        var temp = $(this).val();
+        var value = removeAccents(temp);
+        $(this).val(value);
+    });
+    function removeAccents(text) {
+        if (text == '')
+            return;
+        text = text.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+        text = text.replace(/đ/g, "d");
+        text = text.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+        text = text.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+        text = text.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+        text = text.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+        text = text.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+        text = text.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+        text = text.replace(/Đ/g, "D");
+        text = text.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+        text = text.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+        text = text.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+        text = text.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+        text = text.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+
+        str = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ()-_+?:}{/.,' ";
+        for (i = 0; i < text.length; i++) {
+            if (text.length >= 1 && str.indexOf(text.substr(i, 1)) == -1) {
+                text = text.replace(text.substr(i, 1), '');
+                i = 0;
+            }
+        }
+
+
+        return text.toUpperCase();
+    }
+    $('#clearData').click(function () {
+        location.reload();
+    });
+</script>

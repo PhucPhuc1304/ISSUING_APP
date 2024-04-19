@@ -1,0 +1,168 @@
+﻿@model string
+@using ISSUING_APP.Models;
+@{
+    ViewBag.Title = "_SearchPanel";
+    Layout = null;
+    SESSION_PARA oPara = CShared.getSession();
+    List<CBoxData> lsBranch = Utils.LoadBranchs();
+    List<CBoxData> lsArea = Utils.LoadGlobals_ByGroupType(GlobalGroupTypes.ISSUING_CARD_PLACE);
+
+    List<CBoxData> lsStatus = new List<CBoxData>();
+    lsStatus.Add(new CBoxData { CODE = "0", NAME = "Chờ GDV xử lý" });
+    lsStatus.Add(new CBoxData { CODE = "1", NAME = "Chờ KSV xử lý" });
+    lsStatus.Add(new CBoxData { CODE = "2", NAME = "Đã duyệt" });
+    lsStatus.Add(new CBoxData { CODE = "3", NAME = "Đã từ chối" });
+
+    if (oPara.oAccount.Roles.Contains("billpay-review")) {
+        lsStatus = lsStatus.Where(x => x.CODE == "1" || x.CODE == "2" || x.CODE == "3").ToList();
+    }
+
+    if (oPara.oAccount.Roles.Contains("billpay-input") ||
+        oPara.oAccount.Roles.Contains("billpay-review")
+        ) {
+        lsBranch = lsBranch.Where(x => x.CODE == oPara.oAccount.Branch).ToList();
+    }
+    else if (oPara.oAccount.Roles.Contains("ttt-input") ||
+        oPara.oAccount.Roles.Contains("ttt-review"))
+    {
+
+    }
+
+    string sFromDate = (string)ViewData["sFromDate"];
+    string sToDate = (string)ViewData["sToDate"];
+    string sBranch = (string)ViewData["sBranch"];
+    string sStatus = (string)ViewData["sStatus"];
+}
+
+
+<div class="container section-01">
+    <div class="row line-height-30">
+        <div class="col-sm-1 norwap">Khu vực:</div>
+        <div class="col-sm-2">
+            <select id="cbArea" class="cbCardType custom-select" style="width:100%;float:left;">
+                @foreach (var item in lsArea)
+                {
+                    <option value="@item.CODE">@item.NAME</option>
+                }
+                <option value="000">Tất cả</option>
+            </select>
+        </div>
+        <div class="col-sm-1 norwap">Branch:</div>
+        <div class="col-sm-2">
+            <select id="cbBranch" class="cbCardType custom-select" style="width:100%;float:left;">
+                @foreach (var item in lsBranch)
+            {
+                    <option value="@item.CODE" @(item.CODE == sBranch ? "selected": "")>@item.NAME</option>
+                }
+                @if (CShared.getSession().oAccount.Branch == "001")
+                {
+                    <option value="000">Tất cả</option>
+                }
+            </select>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1 norwap cbStatus">Trạng thái:</div>
+        <div class="col-sm-2">
+            <select id="cbStatus" class="cbStatus custom-select" style="width:100%;float:left;" onchange="cbStatus_onchange(this)">
+                @foreach (var item in lsStatus)
+                {
+                    <option value="@item.CODE" @(item.CODE == sStatus ? "selected": "")>@item.NAME</option>
+                }
+            </select>
+        </div>
+    </div>
+    @if (Model == CPanelSearch.PANEL_CARD)
+    {
+        List<CBoxData> lsCardType = Utils.LoadGlobals_ByGroupType(GlobalGroupTypes.CARD_TYPE);
+        <div class="row line-height-30">
+            <div class="col-sm-1 norwap">Loại thẻ:</div>
+            <div class="col-sm-2">
+                <select id="cbCardType" class="cbCardType custom-select" style="width:100%;float:left;">
+                    @foreach (var item in lsCardType)
+                {
+                        <option value="@item.CODE">@item.NAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+    }
+
+    @if (Model == CPanelSearch.PANEL_ISSUING_CARD)
+    {
+        List<CBoxData> lsCardType = Utils.LoadGlobals_ByGroupType(GlobalGroupTypes.CARD_TYPE);
+        <div class="row line-height-30">
+            <div class="col-sm-1 norwap">Loại thẻ:</div>
+            <div class="col-sm-2">
+                <select id="cbCardType" class="cbCardType custom-select" style="width:100%;float:left;">
+                    @foreach (var item in lsCardType)
+                {
+                        <option value="@item.CODE">@item.NAME</option>
+                    }
+                </select>
+            </div>
+            <div class="col-sm-1 norwap">Trạng thái phát hành:</div>
+            <div class="col-sm-2">
+                <select id="cbIssuingStatus" class="cbIssuingStatus custom-select" style="width:100%;float:left;">
+                    <option value="@ProductStatus_const.Created">Đã tạo thẻ</option>
+                    <option value="@ProductStatus_const.Issuing">Đã phát hành thẻ</option>
+                </select>
+            </div>
+        </div>
+
+    }
+
+    <div class="row line-height-30">
+        <div class="col-lg-1 col-md-1 col-sm-1 norwap">Từ ngày:</div>
+        <div class="col-sm-2">
+            <div class="datepicker-wrap">
+                <div class="input-group">
+                    <input type="text" id="txtFromDate" size="10" class="form-control" value="@sFromDate" style="width:100%;">
+                    <span class="input-group-btn" style="top: 0px;left: 0px;">
+                        <button class="btn btn-default colorRed" type="button" id="btnFromDate" style="width:42px;height:30px;"><i class="glyphicon glyphicon-calendar" aria-hidden="true"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1 norwap">Đến ngày:</div>
+        <div class="col-sm-2">
+            <div class="input-group">
+                <input type="text" id="txtToDate" size="10" class="form-control" value="@sToDate" style="width:100%;">
+                <span class="input-group-btn" style="top: 0px;left: 0px;">
+                    <button class="btn btn-default colorRed" type="button" id="btnToDate" style="width:42px;height:30px;"><i class="glyphicon glyphicon-calendar" aria-hidden="true"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row line-height-30">
+        <div class="col-sm-1 norwap">Mã KH:</div>
+        <div class="col-sm-5">
+            <input type="text" id="txtCustomerId" size="10" class="form-control" value="" style="width:100%;" placeholder="Số CMND/Passport hoặc Mã CIF">
+        </div>
+    </div>
+</div>
+@if (CPanelSearch.PANEL_COMMON == Model)
+{
+    //TODO: [THÊM CONTROL ĐỂ TÌM KIẾM]
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var fdate = $("#txtFromDate").datepicker({ dateFormat: 'dd/mm/yy', changeMonth: true, changeYear: true });
+        var tdate = $("#txtToDate").datepicker({ dateFormat: 'dd/mm/yy', changeMonth: true, changeYear: true });
+
+        var now = new Date();
+        //fdate.datepicker('setDate', now.addDays(-3));
+        //tdate.datepicker('setDate', now.addDays(3));
+
+        @if (string.IsNullOrEmpty(sFromDate) && string.IsNullOrEmpty(sToDate))
+        {
+            <text>
+        fdate.datepicker('setDate', now);
+        tdate.datepicker('setDate', now);
+            </text>
+        }        
+        
+
+        $("#btnFromDate").click(function () { $("#txtFromDate").datepicker("show"); });
+        $("#btnToDate").click(function () { $("#txtToDate").datepicker("show"); });
+    });
+</script>

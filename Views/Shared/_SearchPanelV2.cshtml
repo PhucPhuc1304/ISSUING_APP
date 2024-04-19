@@ -1,0 +1,61 @@
+﻿@model string
+@using ISSUING_APP.Models;
+@{
+    ViewBag.Title = "_SearchPanel";
+    Layout = null;
+    SESSION_PARA oPara = CShared.getSession();
+    List<CBoxData> lsBranch = Utils.LoadBranchs();
+    List<CBoxData> lsArea = Utils.LoadGlobals_ByGroupType(GlobalGroupTypes.ISSUING_CARD_PLACE);
+
+    if (oPara.oAccount.Roles.Contains("billpay-input") ||
+        oPara.oAccount.Roles.Contains("billpay-review")
+        )
+    {
+        lsBranch = lsBranch.Where(x => x.CODE == oPara.oAccount.Branch).ToList();
+    }
+    else if (oPara.oAccount.Roles.Contains("ttt-input") ||
+        oPara.oAccount.Roles.Contains("ttt-review"))
+    {
+
+    }
+
+}
+
+<script src="/Scripts/IssuingCards/SearchAdvDialog.js"></script>
+<link href="/Scripts/IssuingCards/SearchAdvDialog.css" rel="stylesheet" />
+
+<div class="container section-01">
+    <div class="row line-height-30" style="padding: 10px 5px;">
+        <div class="col-sm-1 col-sm-offset-1 nowrap">Số thẻ:</div>
+        <div class="col-sm-4 " style="vertical-align:middle">
+                <input id="txtOP_CARD_NUMBER" class="form-control" style="width: 100%" />
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6" style="text-align:left;">
+            <button type="button" class="btn btn-primary" style="width: 150px;" id="searchData" onclick="doSearch();">Tìm kiếm</button>&nbsp;
+            <button type="button" class="btn btn-primary" style="width: 150px;" id="clearData" onclick="clearAll();">Reset</button>&nbsp;
+            <button type="button" class="btn btn-primary" style="width: 150px;" id="advancedSearch">Tìm kiếm nâng cao</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    // làm sạch tìm kiếm
+    function clearAll() {
+        $("#txtOP_CARD_NUMBER").val("");
+        $("#txtCustomerId").val("");
+        $('#content_wrapper').html(tblDataHtml);
+        InitDataTable();
+    }
+
+    // Lấy giá trị tìm kiếm nâng cào chèn vào thanh tìm kiếm thẻ
+    function SearchInfoCard(giatrinhanve) {
+        doSearch(giatrinhanve.CARD_NUMBER2);
+    }
+    $(document).ready(function () {
+        $('#advancedSearch').bind('click', function () {
+            SearchAdv({
+                fnName: 'SearchInfoCard',
+            });
+        });
+    });
+</script>
+
