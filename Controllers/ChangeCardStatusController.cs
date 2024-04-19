@@ -58,7 +58,7 @@ namespace ISSUING_APP.Controllers
 				return Json(rs, JsonRequestBehavior.AllowGet);
 			}
 
-			if (LOCK_TYPE_OLD == "C055" && P_LOCK_CODE == "C00" && CARD_PRODUCT_CODE.Contains("_CR_") && CARD_PRODUCT_CODE.Contains("_M"))
+			if (LOCK_TYPE_OLD == "C055" && P_LOCK_TYPE == "C00" && CARD_PRODUCT_CODE.Contains("_CR_") && CARD_PRODUCT_CODE.Contains("_M"))
 			{
 				string result = _util.CheckResultIsuingCardLos(LOC_ACCT, CARD_PRODUCT_CODE);
 				if (result != "00")
